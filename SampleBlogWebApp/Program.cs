@@ -14,6 +14,7 @@ namespace SampleBlogWebApp
     {
         public static void Main(string[] args)
         {
+			// This is a comment that has to be integrated using pull request!
             BuildWebHost(args).Run();
         }
 
