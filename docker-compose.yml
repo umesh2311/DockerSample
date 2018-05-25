@@ -1,0 +1,29 @@
+version: '2.1'
+
+services:
+  sqlserverblog-anubhav:
+    image: microsoft/mssql-server-windows-express
+    container_name: sqlserverblog-anubhav       
+    environment:
+      SQLSERVER_SA_PASSWORD: "Testing123456"
+      ACCEPT_EULA: Y      
+    ports:
+      - "1433:1433"
+
+  sampleblogwebapp-anubhav:
+    image: sampleblogwebapp
+    container_name: sampleblogwebapp-anubhav
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SurveyDb: "Server=sqlserverblog-anubhav,1433;Database=Blogging;User Id=sa;Password=Testing123456;"
+    depends_on:
+      - "sqlserverblog-anubhav"
+    ports:
+      - "80:80"
+
+networks:
+  default:
+    external:
+      name: nat
